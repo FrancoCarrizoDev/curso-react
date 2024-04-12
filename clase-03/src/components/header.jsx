@@ -1,6 +1,6 @@
 
 
-function Header() {
+const Header = () => {
 
 
     return (
@@ -18,4 +18,4 @@ function Header() {
     )
   }
   
-export default Header
+ export default Header
