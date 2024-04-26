@@ -1,0 +1,6 @@
+.cart--container > span{
+    color: white;
+    padding: 5px;
+    background-color: tomato;
+     border-radius: 50%;
+ }
