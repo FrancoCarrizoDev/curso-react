@@ -1,0 +1,19 @@
+
+
+.layout--container {
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+
+.main--container {
+    flex: 1
+}
