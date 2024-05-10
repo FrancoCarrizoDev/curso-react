@@ -5,6 +5,11 @@
   gap: 15px;
 }
 
+.item--cart__button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .item__container {
   border: 1px solid #444;
   border-radius: 5px;
@@ -25,7 +30,6 @@
 
 .item--title {
   color: tomato;
-  font-size: 20px;
   min-height: 50px;
   max-height: 50px;
   overflow: auto;

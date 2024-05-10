@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
+
 function Brand() {
   return (
     <div>
-      <h1
-        style={{
-          color: "tomato",
-          fontSize: "40px",
-        }}
-      >
-        Shoppy
-      </h1>
+      <Link to={"./"}>
+        <h1
+          style={{
+            color: "tomato",
+            fontSize: "40px",
+          }}
+        >
+          Shoppy
+        </h1>
+      </Link>
     </div>
   );
 }

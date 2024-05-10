@@ -1,15 +1,17 @@
-import { useState } from "react";
 import "./CartWidget.css";
 import CartIcon from "../CartIcon/CartIcon";
+import { Link } from "react-router-dom";
 
-function CartWidget() {
-  const [cartItems, setCartItems] = useState(4);
-
+function CartWidget({ cartCount }) {
   return (
-    <div className="cart--container">
-      <CartIcon ancho={40} alto={40} />
-      <span>{cartItems}</span>
-    </div>
+    <Link to={"/cart"}>
+      <div className="flex items-center">
+        <CartIcon ancho={40} alto={40} />
+        <span className="rounded-full px-1 text-white bg-amber-400 font-semibold text-sm">
+          {cartCount}
+        </span>
+      </div>
+    </Link>
   );
 }
 

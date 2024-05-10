@@ -5,7 +5,7 @@ export default function ItemCount({ stock, count, increment, decrement }) {
     <div className="item--count__container">
       <div className="item--count--counter__container">
         <button
-          className="item--count-button"
+          className="item--count-button bg-slate-200 rounded-md "
           onClick={decrement}
           disabled={count <= 0}
         >
@@ -13,7 +13,7 @@ export default function ItemCount({ stock, count, increment, decrement }) {
         </button>
         <span className="item--count-button">{count}</span>
         <button
-          className="item--count-button"
+          className="item--count-button bg-slate-200 rounded-md"
           onClick={increment}
           disabled={count >= stock}
         >
