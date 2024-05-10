@@ -3,19 +3,19 @@ import { NavLink } from "react-router-dom";
 
 const MIS_RUTAS = [
   {
-    path: "/moda",
+    path: "/category/moda",
     label: "Moda",
   },
   {
-    path: "/tecnologia",
+    path: "/category/tecnologia",
     label: "Tecnología",
   },
   {
-    path: "/deportes",
+    path: "/category/deportes",
     label: "Deportes",
   },
   {
-    path: "/hogar",
+    path: "/category/hogar",
     label: "Hogar",
   },
 ];
@@ -25,7 +25,7 @@ function CategoryList() {
     <nav>
       <ul className="category--list">
         {MIS_RUTAS.map((ruta) => (
-          <li>
+          <li key={ruta.path}>
             <NavLink
               className={({ isActive }) => (isActive ? "active-link" : "")}
               to={ruta.path}
