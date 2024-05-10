@@ -3,6 +3,7 @@ import CartContext from "../../contexts/CartContext/CartContext";
 
 export default function CartItem({ item }) {
   const { removeFromCart, addToCart } = useContext(CartContext);
+
   return (
     <div
       key={item}

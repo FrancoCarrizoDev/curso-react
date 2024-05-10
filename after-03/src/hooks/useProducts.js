@@ -4,6 +4,7 @@ import { getProducts, getProductsByCategory } from "../mock/asyncMock";
 export default function useProducts(categoryName) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setIsLoading(true);
     if (categoryName) {

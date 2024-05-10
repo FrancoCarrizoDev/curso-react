@@ -1,5 +1,3 @@
-// create array with 5 products with id, name, price and image
-
 const products = [
   {
     id: "1",

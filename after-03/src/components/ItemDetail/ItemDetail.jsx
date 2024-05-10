@@ -6,13 +6,13 @@ import CartContext from "../../contexts/CartContext/CartContext";
 
 export default function ItemDetail({ item }) {
   const { count, increment, decrement, reset } = useCount(0);
-
   const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
     addToCart(item, count);
     reset();
   };
+  // cantidad de prodcuts en el carrito
 
   return (
     <div className="item__container">
@@ -30,6 +30,7 @@ export default function ItemDetail({ item }) {
           decrement={decrement}
         />
       </div>
+
       <div className="item--cart__container">
         <button
           className="item--cart__button"
@@ -39,6 +40,9 @@ export default function ItemDetail({ item }) {
           Add to cart
         </button>
       </div>
+      <p>
+        Quedan <strong>{item.stock - count}</strong> unidades disponibles
+      </p>
     </div>
   );
 }

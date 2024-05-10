@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 
 function ItemListContainer({ saludo }) {
   const { categoryName } = useParams();
-  const { isLoading: productsLoading, products } = useProducts(categoryName);
 
-  if (productsLoading) return <h1>Cargando...</h1>;
+  const { isLoading, products } = useProducts(categoryName);
+
+  if (isLoading) return <h1>Cargando...</h1>;
 
   return (
     <div>
