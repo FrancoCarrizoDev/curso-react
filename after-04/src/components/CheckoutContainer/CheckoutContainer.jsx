@@ -1,20 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CartContext from "../../contexts/CartContext/CartContext";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore";
 import CartDetails from "../CartDetails/CartDetails";
+import useBuyer from "../../hooks/useBuyer";
 
 export default function CheckoutContainer() {
   const { cart, clearCart, cartTotal } = useContext(CartContext);
 
-  const [buyer, setBuyer] = useState({
-    name: "",
-    email: "",
-    lastName: "",
-  });
+  const { buyer, handleInputChange } = useBuyer();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //
+
     const order = {
       buyer,
       cart,
@@ -23,20 +27,38 @@ export default function CheckoutContainer() {
 
     const db = getFirestore();
 
+    for (const itemInCart of cart) {
+      const productRef = doc(db, "products", itemInCart.product.id);
+      const product = await getDoc(productRef);
+      const productData = product.data();
+      if (productData.stock < itemInCart.quantity) {
+        alert(`No hay stock suficiente para el producto ${productData.title}`);
+        // el return corta el flujo de toda función
+        return;
+      }
+    }
+
+    // si tengo stock de todos los productos, entonces hago el addDoc
     const ordersCollection = collection(db, "orders");
 
-    addDoc(ordersCollection, order).then(({ id }) => {
+    addDoc(ordersCollection, order).then(async ({ id }) => {
       alert(`Compra realizada con éxito, tu número de orden es: ${id}`);
       clearCart();
+
+      // si la compra se realizó correctamente, actualizo mi stock de productos en firestore
+
+      for (const itemInCart of cart) {
+        const productRef = doc(db, "products", itemInCart.product.id);
+        const product = await getDoc(productRef);
+        const productData = product.data();
+
+        const newStock = productData.stock - itemInCart.quantity;
+
+        await updateDoc(productRef, { stock: newStock });
+      }
     });
   };
 
-  const handleInputChange = (e) => {
-    setBuyer({
-      ...buyer,
-      [e.target.name]: e.target.value,
-    });
-  };
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">

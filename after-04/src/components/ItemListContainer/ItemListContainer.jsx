@@ -2,7 +2,7 @@ import ItemList from "../ItemList/ItemList";
 import useProducts from "../../hooks/useProducts";
 import { useParams } from "react-router-dom";
 
-function ItemListContainer({ saludo }) {
+function ItemListContainer() {
   const { categoryName } = useParams();
 
   const { isLoading, products } = useProducts(categoryName);
@@ -14,7 +14,6 @@ function ItemListContainer({ saludo }) {
 
   return (
     <div>
-      <h1>{saludo}</h1>
       <ItemList products={products} />
     </div>
   );
