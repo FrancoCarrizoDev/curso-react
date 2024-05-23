@@ -26,14 +26,14 @@ export default function CheckoutContainer() {
     };
 
     const db = getFirestore();
-
+    // antes de hacer el addDoc, verifico que haya stock suficiente para todos los productos
     for (const itemInCart of cart) {
       const productRef = doc(db, "products", itemInCart.product.id);
       const product = await getDoc(productRef);
       const productData = product.data();
       if (productData.stock < itemInCart.quantity) {
         alert(`No hay stock suficiente para el producto ${productData.title}`);
-        // el return corta el flujo de toda función
+        // el return corta el flujo de toda función, si no hay stock suficiente, no hago el addDoc
         return;
       }
     }
@@ -45,7 +45,7 @@ export default function CheckoutContainer() {
       alert(`Compra realizada con éxito, tu número de orden es: ${id}`);
       clearCart();
 
-      // si la compra se realizó correctamente, actualizo mi stock de productos en firestore
+      // si la compra se realizó correctamente (por eso este código va en el .then()), actualizo mi stock de productos en firestore
 
       for (const itemInCart of cart) {
         const productRef = doc(db, "products", itemInCart.product.id);
